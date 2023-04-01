@@ -16,6 +16,10 @@
     <form action="/" method="GET">
       <label for="username">Your name</label>
       <input type="text" name="user-name" id="username" />
+
+      <label for="usermessage">Your message</label>
+      <textarea name="user-message" id="usermessage" cols="30" rows="10"></textarea>
+
       <label for="useremail">Your E-mail address</label>
       <input type="email" name="user-email" id="useremail" />
       <label for="userage">Your age</label>
@@ -25,6 +29,12 @@
       <label for="birthdate">Your birthdate</label>
       <input type="date" name="user-birthdate" id="birthdate" />
       <hr />
+      <label for="favorite-color">What's your favorite color?</label>
+      <select name="favoritecolor" id="favorite-color">
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+      </select>
       <h2>Verify your account</h2>
       <div class="form-control-inline">
         <input type="radio" name="verify" id="verify-message" value="message" />
@@ -37,6 +47,18 @@
       <div class="form-control-inline">
         <input type="radio" name="verify" id="verify-email" value="email" />
         <label for="verify-email">Via an email</label>
+      </div>
+      <div class="form-control-inline">
+        <input type="checkbox" name="temrs" id="agree-terms" />
+        <label for="agree-terms">Agree to terms?</label>
+      </div>
+      <div class="form-control-inline">
+        <input type="checkbox" name="contact" id="contact-email" value="email" />
+        <label for="contact-email">Contact me via email</label>
+      </div>
+      <div class="form-control-inline">
+        <input type="checkbox" name="contact" id="contact-phone" value="phone" />
+        <label for="contact-phone">Contact me via phone</label>
       </div>
       <button>Submit</button>
     </form>
