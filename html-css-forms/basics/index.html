@@ -23,15 +23,15 @@
           <ul>
             <li>
               <label for="username">Your name</label>
-              <input type="text" name="user-name" id="username" />
+              <input type="text" name="user-name" id="username" required />
             </li>
             <li>
               <label for="useremail">Your E-mail address</label>
-              <input type="email" name="user-email" id="useremail" />
+              <input type="email" name="user-email" id="useremail" required />
             </li>
             <li>
               <label for="userpassword">Your password</label>
-              <input type="password" name="user-password" id="userpassword" />
+              <input type="password" name="user-password" id="userpassword" required minlength="7" />
             </li>
           </ul>
         </section>
@@ -41,11 +41,11 @@
           <ul>
             <li>
               <label for="userage">Your age</label>
-              <input type="number" step="1" name="user-age" id="userage" />
+              <input type="number" step="1" name="user-age" id="userage" required min="18" max="100" />
             </li>
             <li>
               <label for="birthdate">Your birthdate</label>
-              <input type="date" name="user-birthdate" id="birthdate" />
+              <input type="date" name="user-birthdate" id="birthdate" required min="1950-01-01" max="2010-01-01" />
             </li>
             <li>
               <label for="favorite-color">What's your favorite color?</label>
@@ -77,6 +77,7 @@
                 name="verify"
                 id="verify-message"
                 value="message"
+                required
               />
               <label for="verify-message">Via text message</label>
             </li>
@@ -86,6 +87,7 @@
                 name="verify"
                 id="verfiy-call"
                 value="phone"
+                required
               />
               <label for="verfiy-call">Via phone call</label>
             </li>
@@ -95,6 +97,7 @@
                 name="verify"
                 id="verify-email"
                 value="email"
+                required
               />
               <label for="verify-email">Via an email</label>
             </li>
@@ -135,7 +138,7 @@
         </section>
 
         <section>
-          <button>Submit</button>
+          <button type="submit">Submit</button>
         </section>
       </form>
     </main>
