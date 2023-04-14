@@ -7,11 +7,17 @@ function updateRemainingChars(event) {
   const remainingChars = inputElement.maxLength - textLength;
   remainingCharsElement.innerText = remainingChars;
 
-  if(remainingChars <= 10){
+  if(remainingChars === 0){
+    inputElement.classList.add("error");
+    remainingCharsElement.classList.add("error");
+  }
+  else if(remainingChars <= 10){
     inputElement.classList.add("warning");
     remainingCharsElement.classList.add("warning");
+    inputElement.classList.remove("error");
+    remainingCharsElement.classList.remove("error");
   }
-  else if(inputElement.classList.contains("warning") && remainingChars > 10){
+  else{
     inputElement.classList.remove("warning");
     remainingCharsElement.classList.remove("warning");
   }
