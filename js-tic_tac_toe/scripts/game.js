@@ -19,11 +19,23 @@ function switchPlayer() {
 }
 
 function selectGameField(event) {
-  if (event.target.tagName !== "LI") {
+  const seletedField = event.target;
+
+  if (seletedField.tagName !== "LI") {
     return;
   }
 
-  event.target.innerHTML = players[activePlayer].symbol;
-  event.target.classList.add(`disabled`);
+  const selectedColumn = seletedField.dataset.col - 1;
+  const selectedrow = seletedField.dataset.row - 1;
+
+  if (gameData[selectedrow][selectedColumn] !== 0) {
+    return;
+  }
+
+  seletedField.innerHTML = players[activePlayer].symbol;
+  seletedField.classList.add(`disabled`);
+
+  gameData[selectedrow][selectedColumn] = activePlayer + 1;
+
   switchPlayer();
 }
