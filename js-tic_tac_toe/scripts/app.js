@@ -1,5 +1,7 @@
 let editedPlayer = 0;
 let activePlayer = 0;
+let currentRound = 1;
+let gameIsOver = false;
 
 const gameData = [
   [0, 0, 0],
@@ -30,6 +32,7 @@ const gameSection = document.querySelector(`#active-game`);
 // const gameField = document.querySelectorAll(`#game-board li`);
 const gameField = document.querySelector(`#game-board`);
 const activePlayerName = document.querySelector(`#active-player-name`);
+const gameOver = document.querySelector(`#game-over`);
 
 editPlayer1Btn.addEventListener("click", openPlayerConfig);
 editPlayer2Btn.addEventListener("click", openPlayerConfig);

@@ -17,7 +17,7 @@ function closePlayerConfig() {
 function savePlayerConfig(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
-  const enteredPlayerName = formData.get("playername").trim();
+  const enteredPlayerName = formData.get("playername").trim(); //스페이스바로 이름을 채우는것에 대한 예외처리
 
   if (!enteredPlayerName) {
     event.target.firstElementChild.classList.add("error");
