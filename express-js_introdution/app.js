@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get(`/`, function (req, res) {
   res.send(
-    `<form action="/store-user" method="POST"><label>Your name</label><input type="text" name="username"><button>Submit</button></form>`
+    `<form action="/store-user" method="POST"><label>Your name: </label><input type="text" name="username"><button>Submit</button></form>`
   );
 });
 
@@ -32,7 +32,7 @@ app.get(`/currenttime`, function (req, res) {
   res.send(`<h1>${new Date().toISOString()}</h1>`);
 });
 
-app.get(`/users`, function(req, res){
+app.get(`/users`, function (req, res) {
   const filePath = path.join(__dirname, `data`, `users.json`);
 
   const fileData = fs.readFileSync(filePath);
@@ -40,13 +40,13 @@ app.get(`/users`, function(req, res){
 
   let resData = `<ul>`;
 
-  for(const user of existingUsers){
+  for (const user of existingUsers) {
     resData += `<li>${user}</li>`;
   }
 
   resData += `</ul>`;
 
   res.send(resData);
-})
+});
 
 app.listen(3000);
