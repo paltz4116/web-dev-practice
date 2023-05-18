@@ -5,5 +5,12 @@
     "cuisine": "Mexican",
     "website": "https://test.com",
     "description": "it's good"
+  },
+  {
+    "name": "French",
+    "address": "Paris",
+    "cuisine": "Burgundy",
+    "website": "https://test.com",
+    "description": "meal is delicious."
   }
 ]
