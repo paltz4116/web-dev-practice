@@ -35,8 +35,8 @@ app.get("/restaurants/:id", function (req, res) {
   const fileData = fs.readFileSync(filePath);
   const storedRestaurants = JSON.parse(fileData);
 
-  for(const restaurant of storedRestaurants){
-    if(restaurant.id === restaurantId){
+  for (const restaurant of storedRestaurants) {
+    if (restaurant.id === restaurantId) {
       return res.render(`restaurant-detail`, { restaurant: restaurant });
     }
   }
@@ -71,8 +71,12 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
-app.use(function(req, res) {
+app.use(function (req, res) {
   res.render(`404`);
+});
+
+app.use(function (error, req, res, next) {
+  res.render(`500`);
 });
 
 app.listen(3000);
