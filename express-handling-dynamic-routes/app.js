@@ -40,6 +40,8 @@ app.get("/restaurants/:id", function (req, res) {
       return res.render(`restaurant-detail`, { restaurant: restaurant });
     }
   }
+
+  res.render(`404`);
 });
 
 app.get("/recommend", function (req, res) {
@@ -67,6 +69,10 @@ app.get("/confirm", function (req, res) {
 
 app.get("/about", function (req, res) {
   res.render("about");
+});
+
+app.use(function(req, res) {
+  res.render(`404`);
 });
 
 app.listen(3000);
