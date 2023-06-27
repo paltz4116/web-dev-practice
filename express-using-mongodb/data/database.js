@@ -15,7 +15,7 @@ function getDb(){
         throw { message: `Database connection is not established.` };
     }
 
-    return datatbase;
+    return database;
 }
 
 module.exports = {
