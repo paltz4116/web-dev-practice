@@ -1,33 +1,55 @@
-const express = require('express');
+const express = require("express");
 const bcrypt = require(`bcryptjs`);
 
-const db = require('../data/database');
+const db = require("../data/database");
 
 const router = express.Router();
 
-router.get('/', function (req, res) {
-  res.render('welcome');
+router.get("/", function (req, res) {
+  res.render("welcome");
 });
 
-router.get('/signup', function (req, res) {
-  res.render('signup');
+router.get("/signup", function (req, res) {
+  res.render("signup");
 });
 
-router.get('/login', function (req, res) {
-  res.render('login');
+router.get("/login", function (req, res) {
+  res.render("login");
 });
 
-router.post('/signup', async function (req, res) {
+router.post("/signup", async function (req, res) {
   const userData = req.body;
   const email = userData.email;
   const confirmEmail = userData[`confirm-email`];
   const password = userData.password;
 
+  if (
+    !email ||
+    !confirmEmail ||
+    !password ||
+    password.trim() < 3 ||
+    email !== confirmEmail ||
+    !email.includes(`@`)
+  ) {
+    console.log(`incorrect data`);
+    return res.redirect(`/signup`);
+  }
+
+  const existingUser = await db
+    .getDb()
+    .collection(`users`)
+    .findOne({ email: email });
+
+  if(existingUser){
+    console.log(`existing user`);
+    return res.redirect(`/signup`);
+  }
+
   const hashedPwd = await bcrypt.hash(password, 12);
 
   const user = {
     email: email,
-    password: hashedPwd
+    password: hashedPwd,
   };
 
   await db.getDb().collection(`users`).insertOne(user);
@@ -35,12 +57,36 @@ router.post('/signup', async function (req, res) {
   res.redirect(`/login`);
 });
 
-router.post('/login', async function (req, res) {});
+router.post("/login", async function (req, res) {
+  const userData = req.body;
+  const email = userData.email;
+  const password = userData.password;
 
-router.get('/admin', function (req, res) {
-  res.render('admin');
+  const existingUser = await db
+    .getDb()
+    .collection(`users`)
+    .findOne({ email: email });
+
+  if (!existingUser) {
+    console.log(`user email data is not existing`);
+    return res.redirect(`/login`);
+  }
+
+  const pwdEqual = await bcrypt.compare(password, existingUser.password);
+
+  if (!pwdEqual) {
+    console.log(`password is not equal`);
+    return res.redirect(`/login`);
+  }
+
+  console.log(`User is authenticated`);
+  res.redirect(`/admin`);
 });
 
-router.post('/logout', function (req, res) {});
+router.get("/admin", function (req, res) {
+  res.render("admin");
+});
+
+router.post("/logout", function (req, res) {});
 
 module.exports = router;
