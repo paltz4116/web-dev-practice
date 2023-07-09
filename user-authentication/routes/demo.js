@@ -40,7 +40,7 @@ router.post("/signup", async function (req, res) {
     .collection(`users`)
     .findOne({ email: email });
 
-  if(existingUser){
+  if (existingUser) {
     console.log(`existing user`);
     return res.redirect(`/signup`);
   }
@@ -79,8 +79,11 @@ router.post("/login", async function (req, res) {
     return res.redirect(`/login`);
   }
 
-  console.log(`User is authenticated`);
-  res.redirect(`/admin`);
+  req.session.user = { id: existingUser._id, email: existingUser.email };
+  req.session.isAuthenticated = true;
+  req.session.save(function () {
+    res.redirect(`/admin`);
+  });
 });
 
 router.get("/admin", function (req, res) {
