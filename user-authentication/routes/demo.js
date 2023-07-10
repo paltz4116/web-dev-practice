@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require(`bcryptjs`);
 
 const db = require("../data/database");
+const session = require("express-session");
 
 const router = express.Router();
 
@@ -87,9 +88,17 @@ router.post("/login", async function (req, res) {
 });
 
 router.get("/admin", function (req, res) {
+  if(!req.session.isAuthenticated){
+    return res.status(401).render(`401`);
+  }
+
   res.render("admin");
 });
 
-router.post("/logout", function (req, res) {});
+router.post("/logout", function (req, res) {
+  req.session.user = null;
+  req.session.isAuthenticated = false;
+  res.redirect(`/`);
+});
 
 module.exports = router;
