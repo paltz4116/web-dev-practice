@@ -28,6 +28,7 @@ router.get('/signup', function (req, res) {
 
 router.get('/login', function (req, res) {
   let sessionInputData = req.session.inputData;
+  const csrfToken = req.csrfToken();
 
   if (!sessionInputData) {
     sessionInputData = {
@@ -38,7 +39,7 @@ router.get('/login', function (req, res) {
   }
 
   req.session.inputData = null;
-  res.render('login', { inputData: sessionInputData });
+  res.render('login', { inputData: sessionInputData, csrfToken: csrfToken });
 });
 
 router.post('/signup', async function (req, res) {
@@ -154,7 +155,8 @@ router.get('/transaction', function (req, res) {
   if (!res.locals.isAuth) {
     return res.status(401).render('401');
   }
-  res.render('transaction');
+  const csrfToken = req.csrfToken();
+  res.render('transaction', { csrfToken: csrfToken });
 });
 
 router.post('/transaction', async function(req, res) {
