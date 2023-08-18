@@ -1,8 +1,8 @@
 class Cart {
   constructor(items = [], totalQuantity = 0, totalPrice = 0) {
     this.items = items;
-    this.totalQuantity = totalQuantity;
-    this.totalPrice = totalPrice;
+    this.totalQuantity = Number(totalQuantity);
+    this.totalPrice = Number(totalPrice);
   }
 
   addItem(product) {
